@@ -11,7 +11,7 @@ CREATE TABLE book
     author VARCHAR(50) NOT NULL,
     barcode VARCHAR(13) NOT NULL UNIQUE,
     quantity INT UNSIGNED,
-    price_per_unit DECIMAL(10,2) NOT NULL
+    price_per_unit DOUBLE(10,2) NOT NULL
 );
 
 CREATE TABLE antique_book
