@@ -6,12 +6,13 @@ USE book_store;
 
 CREATE TABLE book
 (
-    id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    id BIGINT UNSIGNED AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL,
     author VARCHAR(50) NOT NULL,
     barcode VARCHAR(13) NOT NULL UNIQUE,
     quantity INT UNSIGNED,
-    price_per_unit DOUBLE(10,2) NOT NULL
+    price_per_unit DOUBLE(10,2) NOT NULL,
+    PRIMARY KEY (id, barcode)
 );
 
 CREATE TABLE antique_book
@@ -21,7 +22,7 @@ CREATE TABLE antique_book
     CONSTRAINT FK_ANTIQUE_BOOK FOREIGN KEY (id) REFERENCES book (id)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
-    release_year DATE NOT NULL
+    release_year INT NOT NULL
 );
 
 CREATE TABLE science_journal
