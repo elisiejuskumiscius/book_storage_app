@@ -1,7 +1,10 @@
 package book.storage.app.model;
 
+import org.hibernate.annotations.NaturalId;
+
 import javax.persistence.*;
-import java.math.BigDecimal;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -19,14 +22,19 @@ public class Book  {
     @Column(name = "author", length = 50, nullable = false)
     private String author;
 
-    @Column(name = "barcode", length = 13, nullable = false, unique = true)
+    @NaturalId
+    @Column(name = "barcode", length = 13, nullable = false, unique = true, updatable = false)
     private String barcode;
 
+    @Min(value = 0, message = "Quantity must be greater than or equal to zero")
+    @NotNull(message = "Quantity is required")
     @Column(name = "quantity")
-    private int quantity;
+    private Integer quantity;
 
+    @Min(value = 0, message = "Price must be greater than or equal to zero")
+    @NotNull(message = "Price is required")
     @Column(name = "price_per_unit", nullable = false)
-    private BigDecimal price;
+    private Double price;
 
     public Book() { }
 
@@ -50,27 +58,22 @@ public class Book  {
         this.author = author;
     }
 
-    public String getBarcode() {
-        return barcode;
-    }
+    public String getBarcode() { return barcode; }
 
-    public void setBarcode(String barcode) {
-        this.barcode = barcode;
-    }
+    public void setBarcode(String barcode) { this.barcode = barcode; }
 
-    public int getQuantity() {
-        return quantity;
-    }
+    public Integer getQuantity() { return quantity; }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 
-    public BigDecimal getPrice() {
-        return price;
-    }
+    public Double getPrice() { return price; }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
+
+    public double getTotalPrice() { return this.price * this.quantity; }
+
 }
