@@ -11,7 +11,7 @@ body {
 }
 footer {
     margin-bottom: 0 !important;
-    margin-top: 80px;
+    margin-top: 180px;
 }
 footer p {
     margin: 0;
@@ -30,7 +30,7 @@ h2 {
     letter-spacing: 1px;
 }
 .mrng-60-top {
-    margin-top: 60px;
+    margin-top: 260px;
 }
 
 a.animated-button:link, a.animated-button:visited {
