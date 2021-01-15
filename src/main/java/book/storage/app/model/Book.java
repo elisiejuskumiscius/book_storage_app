@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(name = "book")
+@Table(name = "book", schema = "book_store")
 public class Book  {
 
     @Id

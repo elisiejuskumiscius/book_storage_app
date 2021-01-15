@@ -8,7 +8,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "science_journal")
+@Table(name = "science_journal", schema = "book_store")
 public class ScienceJournal extends Book {
 
     @Min(value = 1)
