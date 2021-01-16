@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:javascript="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8">
@@ -18,9 +18,9 @@
         <div class="card-body">
             <div th:switch="${books}" class="container my-5">
                 <p>
-                    <a href="/bookstore/main" class="btn btn-primary">
+                    <a href="javascript:history.back();" class="btn btn-primary">
                         <i class="fa fa-home"></i> Home</a>
-                    <a href="/bookstore/book-add" class="btn btn-primary">
+                    <a href="/book-add" class="btn btn-primary">
                         <i class="fas fa-user-plus ml-2"> Add Book</i></a>
                 </p>
                 <div class="col-md-10">
@@ -46,8 +46,8 @@
                                 <td th:text="${book.quantity}"></td>
                                 <td th:text="${book.price}"></td>
                                 <td th:text="${book.getTotalPrice}"></td>
-                                <td><a th:href="@{/bookstore/book/edit/{barcode}(barcode=${book.barcode})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
-                                <td><a th:href="@{/bookstore/delete/{barcode}(barcode=${book.barcode})}" class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
+                                <td><a th:href="@{/book/edit/{barcode}(barcode=${book.barcode})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
+                                <td><a th:href="@{/delete/{barcode}(barcode=${book.barcode})}" class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
                             </tr>
                             </tbody>
                         </table>

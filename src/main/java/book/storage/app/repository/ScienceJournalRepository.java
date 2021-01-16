@@ -18,7 +18,7 @@ public interface ScienceJournalRepository extends Repository<ScienceJournal, Lon
 
     @Modifying
     @Query("UPDATE ScienceJournal as book SET book.name = :name, book.quantity = :quantity, book.author = :author, book.price = :price, book.index = :index WHERE book.barcode = :barcode")
-    void updateAntiqueBook(@Param("barcode") String barcode, @Param("name") String name, @Param("quantity") Integer quantity, @Param("author") String author, @Param("price") Double price, @Param("index") Byte index);
+    void updateAntiqueBook(@Param("barcode") String barcode, @Param("name") String name, @Param("quantity") Integer quantity, @Param("author") String author, @Param("price") Double price, @Param("index") Integer index);
 
     void deleteScienceJournalByBarcode(String barcode);
 

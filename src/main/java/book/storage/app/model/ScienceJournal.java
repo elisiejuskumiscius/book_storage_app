@@ -15,13 +15,11 @@ public class ScienceJournal extends Book {
     @Max(value = 10)
     @NotNull(message = "Science Index is required")
     @Column(name = "science_index")
-    private Byte index;
+    private Integer index;
 
-    public byte getIndex() {
-        return index;
-    }
+    public Integer getIndex() { return index; }
 
-    public void setIndex(Byte index) {
+    public void setIndex(Integer index) {
         this.index = index;
     }
 

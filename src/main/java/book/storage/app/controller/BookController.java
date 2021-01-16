@@ -14,7 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/bookstore/")
+@RequestMapping()
 public class BookController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -30,30 +30,30 @@ public class BookController {
         this.scienceJournalService = scienceJournalService;
     }
 
-    @GetMapping("main")
+    @GetMapping()
     public String showMain() {
         return "main";
     }
 
-    @GetMapping("book-list")
+    @GetMapping("/book-list")
     public String showUpdate(Model model) {
         model.addAttribute("books", bookService.getBooks());
         return "book-list";
     }
 
-    @GetMapping("antique-list")
+    @GetMapping("/antique-list")
     public String showAntique(Model model) {
         model.addAttribute("books", antiqueBookService.getAllAntique());
         return "antique-list";
     }
 
-    @GetMapping("journal-list")
+    @GetMapping("/journal-list")
     public String showJournal(Model model) {
         model.addAttribute("books", scienceJournalService.getAllJournals());
         return "journal-list";
     }
 
-    @GetMapping(value = {"book-add"})
+    @GetMapping(value = {"/book-add"})
     public String showAddBook(Model model) {
         Book book = new Book();
         model.addAttribute("add", true);
@@ -61,12 +61,12 @@ public class BookController {
         return "book-add";
     }
 
-    @PostMapping(value = {"book-add"})
+    @PostMapping(value = {"/book-add"})
     public String addBook(Model model, @ModelAttribute("book") Book book) {
 
         try {
             bookService.save(book);
-            return "redirect:/bookstore/book-list";
+            return "redirect:/book-list";
 
         } catch (Exception ex) {
             String errorMessage = ex.getMessage();
@@ -77,7 +77,7 @@ public class BookController {
         }
     }
 
-    @GetMapping(value = {"antique-add"})
+    @GetMapping(value = {"/antique-add"})
     public String showAddAntiqueBook(Model model) {
         AntiqueBook antiqueBook = new AntiqueBook();
         model.addAttribute("add", true);
@@ -85,12 +85,12 @@ public class BookController {
         return "antique-add";
     }
 
-    @PostMapping(value = "antique-add")
+    @PostMapping(value = "/antique-add")
     public String addAntiqueBook(Model model, @ModelAttribute("antique") AntiqueBook antiqueBook, Book book) {
 
         try {
             antiqueBookService.saveAntiqueBook(antiqueBook);
-            return "redirect:/bookstore/antique-list";
+            return "redirect:/antique-list";
 
         } catch (Exception ex) {
             String errorMessage = ex.getMessage();
@@ -101,7 +101,7 @@ public class BookController {
         }
     }
 
-    @GetMapping(value = {"journal-add"})
+    @GetMapping(value = {"/journal-add"})
     public String showAddScienceJournal(Model model) {
         ScienceJournal scienceJournal = new ScienceJournal();
         model.addAttribute("add", true);
@@ -109,12 +109,12 @@ public class BookController {
         return "journal-add";
     }
 
-    @PostMapping(value = "journal-add")
+    @PostMapping(value = "/journal-add")
     public String addScienceJournal(Model model, @ModelAttribute("journal") ScienceJournal scienceJournal) {
 
         try {
             scienceJournalService.saveScienceJournal(scienceJournal);
-            return "redirect:/bookstore/journal-list";
+            return "redirect:/journal-list";
 
         } catch (Exception ex) {
             String errorMessage = ex.getMessage();
@@ -125,7 +125,7 @@ public class BookController {
         }
     }
 
-    @GetMapping("book/edit/{barcode}")
+    @GetMapping("/book/edit/{barcode}")
     public String showEditBook(Model model, @PathVariable String barcode) {
         Book book = null;
         try {
@@ -135,16 +135,16 @@ public class BookController {
         }
         model.addAttribute("add", false);
         model.addAttribute("book", book);
-        return "update-book";
+        return "/update-book";
     }
 
-    @PostMapping("book/update/{barcode}")
+    @PostMapping("/book/update/{barcode}")
     public String updateBook(Model model, @PathVariable String barcode, @ModelAttribute("book") Book book) {
 
         try {
             book.setBarcode(barcode);
             bookService.update(book);
-            return "redirect:/bookstore/book-list/";
+            return "redirect:/book-list";
 
         } catch (Exception ex) {
             String errorMessage = ex.getMessage();
@@ -155,7 +155,7 @@ public class BookController {
         }
     }
 
-    @GetMapping("antique/edit/{barcode}")
+    @GetMapping("/antique/edit/{barcode}")
     public String showEditAntiqueBook(Model model, @PathVariable String barcode) {
         Book book = null;
         try {
@@ -174,7 +174,7 @@ public class BookController {
         try {
             book.setBarcode(barcode);
             antiqueBookService.updateAntiqueBook(book, antiqueBook);
-            return "redirect:/bookstore/antique-list/";
+            return "redirect:/antique-list";
 
         } catch (Exception ex) {
             String errorMessage = ex.getMessage();
@@ -204,7 +204,7 @@ public class BookController {
         try {
             book.setBarcode(barcode);
             scienceJournalService.updateScienceJournal(book, scienceJournal);
-            return "redirect:/bookstore/journal-list/";
+            return "redirect:/journal-list";
 
         } catch (Exception ex) {
             String errorMessage = ex.getMessage();
@@ -220,21 +220,21 @@ public class BookController {
     public String deleteBook(@PathVariable("barcode") String barcode, Model model) {
         bookService.delete(barcode);
         model.addAttribute("books", bookService.getBooks());
-        return "redirect:/bookstore/book-list";
+        return "redirect:/book-list";
     }
 
     @GetMapping("antique/delete/{barcode}")
     public String deleteAntiqueBook(@PathVariable("barcode") String barcode, Model model) {
         antiqueBookService.deleteByBarcode(barcode);
         model.addAttribute("books", antiqueBookService.getAllAntique());
-        return "redirect:/bookstore/antique-list";
+        return "redirect:/antique-list";
     }
 
     @GetMapping("journal/delete/{barcode}")
     public String deleteScienceJournal(@PathVariable("barcode") String barcode, Model model) {
         scienceJournalService.deleteByBarcode(barcode);
         model.addAttribute("books", scienceJournalService.getAllJournals());
-        return "redirect:/bookstore/journal-list";
+        return "redirect:/journal-list";
     }
 
 }

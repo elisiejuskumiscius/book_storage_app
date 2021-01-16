@@ -18,9 +18,9 @@
         <div class="card-body">
             <div th:switch="${books}" class="container my-5">
                 <p>
-                    <a href="/bookstore/main" class="btn btn-primary">
+                    <a href="javascript:history.back();" class="btn btn-primary">
                         <i class="fa fa-home"></i> Home</a>
-                    <a href="/bookstore/antique-add" class="btn btn-primary">
+                    <a href="/antique-add" class="btn btn-primary">
                         <i class="fas fa-user-plus ml-2"> Add Antique Book</i></a>
                 </p>
                 <div class="col-md-10">
@@ -48,8 +48,8 @@
                                 <td th:text="${book.price}"></td>
                                 <td th:text="${book.releaseYear}"></td>
                                 <td th:text="${#numbers.formatDecimal(book.getTotalPrice, 0, 'COMMA', 2, 'POINT')}"></td>
-                                <td><a th:href="@{/bookstore/antique/edit/{barcode}(barcode=${book.barcode})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
-                                <td><a th:href="@{/bookstore/antique/delete/{barcode}(barcode=${book.barcode})}" class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
+                                <td><a th:href="@{/antique/edit/{barcode}(barcode=${book.barcode})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
+                                <td><a th:href="@{/antique/delete/{barcode}(barcode=${book.barcode})}" class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
                             </tr>
                             </tbody>
                         </table>
