@@ -135,7 +135,7 @@ public class BookController {
         }
         model.addAttribute("add", false);
         model.addAttribute("book", book);
-        return "/update-book";
+        return "update-book";
     }
 
     @PostMapping("/book/update/{barcode}")
@@ -165,7 +165,7 @@ public class BookController {
         }
         model.addAttribute("add", false);
         model.addAttribute("book", book);
-        return "update-journal";
+        return "update-antique";
     }
 
     @PostMapping("antique/update/{barcode}")
